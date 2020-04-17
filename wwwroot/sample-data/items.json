@@ -1,0 +1,27 @@
+[
+  {
+    "Title": "First one",
+    "Description": "Dit is de descriptie one",
+    "Price": 24,
+    "Image_url": "https://placehold.it/250x150"
+  },
+  {
+    "Title": "second one",
+    "Description": "Dit is de descriptie 2",
+    "Price": 84,
+    "Image_url": "https://placehold.it/250x150"
+  },
+  {
+    "Title": "Third one",
+    "Description": "Dit is de descriptie 3",
+    "Price": 54,
+    "Image_url": "https://placehold.it/250x150"
+  },
+    {
+      "Title": "Fourth one",
+      "Description": "Dit is de descriptie 4",
+      "Price": 34,
+      "Image_url": "https://placehold.it/250x150"
+    }
+]
+

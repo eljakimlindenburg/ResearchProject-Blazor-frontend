@@ -1,0 +1,44 @@
+﻿@using Blazor.Models;
+
+<div class="card">
+    <img src="@prod.image_src" alt="" class="card-img-top">
+    <div class="card-body">
+        <h3 class="card-title text-primary">@prod.Title</h3>
+        <h4 class="card-price">@prod.Price</h4>
+        <p class="card-text">@prod.Desc</p>
+    </div>
+    <div class="card-body bg-light border-top">
+
+        <div class="float-left">
+            <i class="far fa-star fa-sm"></i>
+            <i class="far fa-star fa-sm"></i>
+            <i class="far fa-star fa-sm"></i>
+            <i class="far fa-star fa-sm"></i>
+            <i class="far fa-star fa-sm"></i>
+        </div>
+
+
+        <div class="float-right">
+            <i class="far fa-heart fa-sm"></i>
+            <i class="fas fa-shopping-basket fa-sm"></i>
+        </div>
+
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string Title { get; set; }
+
+    [Parameter]
+    public string Description { get; set; }
+
+    [Parameter]
+    public int Price { get; set; }
+
+    [Parameter]
+    public string Image_url{get; set;}
+
+    [Parameter]
+    public Product prod { get; set; }
+}
