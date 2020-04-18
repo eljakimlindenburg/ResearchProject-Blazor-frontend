@@ -13,5 +13,12 @@ namespace Blazor.Models
         public DateTime timestamp { get; set; }
         public int rating { get; set; }
         public string comment { get; set; }
+
+        public int getNrOfStars()
+        {
+            int nr = Math.Abs(rating / 20);
+            return nr;
+        }
+
     }
 }

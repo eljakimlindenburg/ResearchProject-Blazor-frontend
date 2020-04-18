@@ -265,3 +265,7 @@ C:\Users\Lterwingen\Desktop\switch1920\researchProject\apps\Blazor\ResearchProje
 C:\Users\Lterwingen\Desktop\switch1920\researchProject\apps\Blazor\ResearchProject-Blazor-frontend\obj\Debug\netstandard2.0\Blazor.csprojAssemblyReference.cache
 C:\Users\Lterwingen\Desktop\switch1920\researchProject\apps\Blazor\ResearchProject-Blazor-frontend\obj\Debug\netstandard2.0\RazorDeclaration\Pages\DetailPage.razor.g.cs
 C:\Users\Lterwingen\Desktop\switch1920\researchProject\apps\Blazor\ResearchProject-Blazor-frontend\obj\Debug\netstandard2.0\Razor\Pages\DetailPage.razor.g.cs
+C:\Users\Lterwingen\Desktop\switch1920\researchProject\apps\Blazor\ResearchProject-Blazor-frontend\obj\Debug\netstandard2.0\RazorDeclaration\Shared\ProductInfo.razor.g.cs
+C:\Users\Lterwingen\Desktop\switch1920\researchProject\apps\Blazor\ResearchProject-Blazor-frontend\obj\Debug\netstandard2.0\RazorDeclaration\Shared\Review.razor.g.cs
+C:\Users\Lterwingen\Desktop\switch1920\researchProject\apps\Blazor\ResearchProject-Blazor-frontend\obj\Debug\netstandard2.0\Razor\Shared\ProductInfo.razor.g.cs
+C:\Users\Lterwingen\Desktop\switch1920\researchProject\apps\Blazor\ResearchProject-Blazor-frontend\obj\Debug\netstandard2.0\Razor\Shared\Review.razor.g.cs

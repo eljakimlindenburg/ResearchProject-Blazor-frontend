@@ -1,0 +1,43 @@
+﻿@using Blazor.Models;
+
+<div class="card" id="productInfo">
+
+    <img src="@prod.image_src" alt="" class="card-img-top" style="max-height:400px;">
+    <div class="card-body">
+        <h1 class="card-title text-primary">@prod.Title</h1>
+
+        <h2 class="card-price">€@prod.Price</h2>
+
+        <p class="card-text">
+            @prod.Desc
+        </p>
+    </div>
+
+    <div class="card-body">
+
+        <div class="float-left">
+            @{
+                var nrOfStars = prod.getAverageStars();
+                var maxStars = 5;
+
+                for (var i = 0; i < nrOfStars; i++)
+                {
+                    <i class="fas fa-star fa-sm" style="color:#ffd800"></i>
+                }
+
+                if (maxStars > nrOfStars)
+                {
+                    var starsLeft = maxStars - nrOfStars;
+                    for (var j = 0; j < starsLeft; j++)
+                    {
+                        <i class="far fa-star fa-sm"></i>
+                    }
+                }
+            }
+        </div>
+    </div>
+</div>
+@code {
+    [Parameter]
+    public Product prod { get; set; }
+}

@@ -16,5 +16,11 @@ namespace Blazor.Models
         public string Desc { get; set; }
         public decimal Price { get; set; }
         public string image_src { get; set; }
+
+        public decimal getAverageStars()
+        {
+            decimal nr = Math.Floor(Average_rating);
+            return nr;
+        }
     }
 }

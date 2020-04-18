@@ -1,0 +1,66 @@
+﻿@using Blazor.Models;
+
+    <div class="card mt-3">
+
+        <div class="card-header">Reviews</div>
+
+        @if (reviews == null)
+        {
+            <p><em>Loading....</em></p>
+        }
+        else
+        {
+            @foreach (var review in reviews)
+            {
+                <div class="card-body">
+                    <div class="float-left mr-3">
+
+
+                        @{
+                            var nrOfStars = review.getNrOfStars();
+                            var maxStars = 5;
+
+                            for (var i = 0; i < nrOfStars; i++)
+                            {
+                                <i class="fas fa-star fa-sm" style="color:#ffd800"></i>
+                            }
+
+                            if (maxStars > nrOfStars)
+                            {
+                                var starsLeft = maxStars - nrOfStars;
+                                for (var j = 0; j < starsLeft; j++)
+                                {
+                                    <i class="far fa-star fa-sm"></i>
+                                }
+                            }
+                        }
+                    </div>
+                    <span> | </span>
+                    <p class="card-title text-primary ml-3" style="display:inline-block;">@review.title</p>
+
+
+
+                    <p class="card-text">
+                        @review.comment
+                    </p>
+
+                    <p class="card-author card-text">
+                        <small>
+                            Posted by @review.author_name on 30/03/2020
+                        </small>
+                    </p>
+                </div>
+
+                if (!review.Equals(reviews.Last()))
+                {
+                    <hr />
+                }
+            }
+        }
+    </div>
+
+@code {
+    [Parameter]
+    public ReviewModel[] reviews { get; set; }
+
+}

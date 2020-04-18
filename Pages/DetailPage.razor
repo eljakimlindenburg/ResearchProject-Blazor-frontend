@@ -1,5 +1,37 @@
-﻿<h3>DetailPage</h3>
+﻿@using Blazor.Models;
+@page "/detailpage"
+@page "/detailpage/{productId}"
 
-@code {
+@inject HttpClient Http
 
+
+@if (product == null)
+{
+    <span><em>Loading...</em></span>
 }
+else
+{
+    <div class="col-sm-8">
+        <ProductInfo prod="@product" />
+
+        <Review reviews="@product.reviews" />
+    </div>
+}
+       
+
+
+        @code {
+    [Parameter]
+        public string productId
+        {
+            get; set;
+        }
+        Product product;
+
+        protected override async Task OnInitializedAsync()
+        {
+            // products = await Http.GetJsonAsync<Product[]>("/sample-data/items.json");
+
+            product = await Http.GetJsonAsync<Product>("http://localhost:3333/items/" + productId);
+        }
+        }
