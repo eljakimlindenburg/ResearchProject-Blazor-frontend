@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Components.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Blazor.Extensions.Storage;
 
 namespace Blazor
 {
@@ -7,6 +8,7 @@ namespace Blazor
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddStorage();
         }
 
         public void Configure(IComponentsApplicationBuilder app)

@@ -1,11 +1,15 @@
 ﻿@using Blazor.Models;
 
+@inject Blazor.Extensions.Storage.Interfaces.ILocalStorage LocalStorage
+
 <div class="card">
     <img src="@prod.image_src" alt="" class="card-img-top">
     <div class="card-body">
         <h3 class="card-title text-primary"><a href="/detailpage/@prod.id">@prod.Title</a></h3>
         <h4 class="card-price">@prod.Price</h4>
         <p class="card-text">@prod.Desc</p>
+        <p>@CartStateProvider.ToString()</p>
+
     </div>
     <div class="card-body bg-light border-top">
 
@@ -19,14 +23,21 @@
 
 
         <div class="float-right">
-            <i class="far fa-heart fa-sm"></i>
-            <i class="fas fa-shopping-basket fa-sm"></i>
+            <button class="btn btn-secondary">
+                <i class="far fa-heart fa-sm"></i>
+            </button>
+            
+           <button class="btn btn-primary" @onclick="AddToBasket">
+               <i class="fas fa-shopping-basket fa-sm" ></i>
+           </button> 
         </div>
 
     </div>
 </div>
 
 @code {
+    [CascadingParameter] CartStateProvider CartStateProvider { get; set; }
+
     [Parameter]
     public string Title { get; set; }
 
@@ -37,8 +48,36 @@
     public int Price { get; set; }
 
     [Parameter]
-    public string Image_url{get; set;}
+    public string Image_url { get; set; }
 
     [Parameter]
     public Product prod { get; set; }
+
+    async Task AddToBasket(MouseEventArgs e)
+    {
+
+
+        var item = new CartProduct
+        {
+            Product = prod,
+            Quantity = Convert.ToInt32(1)
+        };
+
+        var items = CartStateProvider.ShoppingCart.Items;
+        var itemInCart = items.FindIndex(x => x.Product.Equals(item.Product));
+
+        if(itemInCart >= 0)
+        {
+            CartStateProvider.ShoppingCart.Items[itemInCart].Quantity++;
+        }
+        else
+        {
+            CartStateProvider.ShoppingCart.Items.Add(item);
+        }
+
+        Console.WriteLine(CartStateProvider.ToString());
+
+        await CartStateProvider.SaveChangesAsync();
+
+    }
 }

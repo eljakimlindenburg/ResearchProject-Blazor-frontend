@@ -42,6 +42,10 @@
       "frameworks": {
         "netstandard2.0": {
           "dependencies": {
+            "Blazor.Extensions.Storage": {
+              "target": "Package",
+              "version": "[1.1.0-preview3, )"
+            },
             "Microsoft.AspNetCore.Blazor": {
               "target": "Package",
               "version": "[3.0.0-preview9.19465.2, )"
@@ -59,6 +63,10 @@
             "Microsoft.AspNetCore.Blazor.HttpClient": {
               "target": "Package",
               "version": "[3.0.0-preview9.19465.2, )"
+            },
+            "Microsoft.AspNetCore.ProtectedBrowserStorage": {
+              "target": "Package",
+              "version": "[0.1.0-alpha.19521.1, )"
             },
             "NETStandard.Library": {
               "suppressParent": "All",

@@ -1,9 +1,11 @@
 ﻿@using Blazor.Models;
+@using Blazor.Extensions.Storage;
+
 @page "/detailpage"
 @page "/detailpage/{productId}"
 
 @inject HttpClient Http
-
+@inject Blazor.Extensions.Storage.Interfaces.ILocalStorage LocalStorage
 
 @if (product == null)
 {
@@ -11,27 +13,59 @@
 }
 else
 {
-    <div class="col-sm-8">
-        <ProductInfo prod="@product" />
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8">
+                <ProductInfo prod="@product" />
 
-        <Review reviews="@product.reviews" />
-    </div>
-}
+                <Review reviews="@product.reviews" />
+            </div>
+        </div>
        
+    </div>
+
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8">
+            @if (localProducts == null)
+            {
+                <p>Nothing in localstorage</p>
+            }
+            else
+            {
+                @foreach (var prod in localProducts)
+                {
+                    <p>@prod.Author</p>
+                }
+            }
+
+        </div>
+    </div> 
+</div>
 
 
-        @code {
+
+@code {
     [Parameter]
-        public string productId
-        {
-            get; set;
-        }
-        Product product;
+    public string productId
+    {
+        get; set;
+    }
+    Product product;
 
-        protected override async Task OnInitializedAsync()
-        {
-            // products = await Http.GetJsonAsync<Product[]>("/sample-data/items.json");
+    Product[] localProducts;
 
-            product = await Http.GetJsonAsync<Product>("http://localhost:3333/items/" + productId);
-        }
-        }
+    protected override async Task OnInitializedAsync()
+    {
+        // products = await Http.GetJsonAsync<Product[]>("/sample-data/items.json");
+
+        product = await Http.GetJsonAsync<Product>("http://localhost:3333/items/" + productId);
+        var key = "products";
+
+        localProducts = await LocalStorage.GetItem<Product[]>(key);
+    }
+
+
+}

@@ -1,11 +1,10 @@
 ﻿@using Blazor.Models;
+@using Blazor.Extensions.Storage;
 
 @page "/"
 
 @inject HttpClient Http
-
-
-
+@inject Blazor.Extensions.Storage.Interfaces.ILocalStorage LocalStorage
 <div class="container">
     <div class="row">
         @if (products == null)
@@ -14,14 +13,14 @@
         }
         else
         {
-            @foreach(var prod in products)
+            @foreach (var prod in products)
             {
                 <div class="col-sm-4">
                     <ItemCard prod="@prod" />
                 </div>
             }
         }
-        </div>
+    </div>
 </div>
 
 @code{
@@ -32,5 +31,9 @@
         // products = await Http.GetJsonAsync<Product[]>("/sample-data/items.json");
 
         products = await Http.GetJsonAsync<Product[]>("http://localhost:3333/items/");
+
+        var key = "products";
+        await LocalStorage.SetItem<Product[]>(key, products);
     }
 }
+

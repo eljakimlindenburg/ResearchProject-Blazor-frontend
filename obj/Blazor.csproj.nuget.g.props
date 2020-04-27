@@ -13,6 +13,7 @@
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
   </PropertyGroup>
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)microsoft.aspnetcore.protectedbrowserstorage\0.1.0-alpha.19521.1\buildTransitive\Microsoft.AspNetCore.ProtectedBrowserStorage.props" Condition="Exists('$(NuGetPackageRoot)microsoft.aspnetcore.protectedbrowserstorage\0.1.0-alpha.19521.1\buildTransitive\Microsoft.AspNetCore.ProtectedBrowserStorage.props')" />
     <Import Project="$(NuGetPackageRoot)microsoft.aspnetcore.blazor.mono\3.0.0-preview9.19462.2\build\netstandard1.0\Microsoft.AspNetCore.Blazor.Mono.props" Condition="Exists('$(NuGetPackageRoot)microsoft.aspnetcore.blazor.mono\3.0.0-preview9.19462.2\build\netstandard1.0\Microsoft.AspNetCore.Blazor.Mono.props')" />
     <Import Project="$(NuGetPackageRoot)microsoft.aspnetcore.blazor.build\3.0.0-preview9.19465.2\build\netstandard1.0\Microsoft.AspNetCore.Blazor.Build.props" Condition="Exists('$(NuGetPackageRoot)microsoft.aspnetcore.blazor.build\3.0.0-preview9.19465.2\build\netstandard1.0\Microsoft.AspNetCore.Blazor.Build.props')" />
   </ImportGroup>

@@ -1,0 +1,32 @@
+﻿@page "/shoppingcart"
+
+@using Blazor.Models
+@inject Blazor.Extensions.Storage.Interfaces.ILocalStorage LocalStorage
+
+<h3>ShoppingCart</h3>
+@if (cart == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    @foreach (var item in cart.Items)
+    {
+        <h1>@item.Product.Title</h1>
+        <p>Quantity :  @item.Quantity</p>
+    }
+}
+
+
+
+@code {
+    Product[] products;
+    Cart cart;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var varcart = await LocalStorage.GetItem<Cart>("MyShoppingCart");
+        Console.WriteLine(varcart);
+        cart = varcart;
+    }
+}
