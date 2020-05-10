@@ -23,6 +23,6 @@ namespace Blazor.Models
         }
 
         public DateTime LastAccessed { get; set; }
-        public int TimeToLive { get; set; } = 3600;
+        public int TimeToLive { get; set; } = 30;
     }
 }

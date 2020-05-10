@@ -3,30 +3,99 @@
 @using Blazor.Models
 @inject Blazor.Extensions.Storage.Interfaces.ILocalStorage LocalStorage
 
-<h3>ShoppingCart</h3>
-@if (cart == null)
-{
-    <p>Loading...</p>
-}
-else
-{
-    @foreach (var item in cart.Items)
-    {
-        <h1>@item.Product.Title</h1>
-        <p>Quantity :  @item.Quantity</p>
-    }
-}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8 bg-light p-3">
+            <div class="card" id="shoppingCartItems">
+                <div class="card-body">
+                    <h3 class="card-title text-secondary">My Bag</h3>
+                </div>
+
+                <div class="card-body">
+                    <hr>
+                </div>
+                @if (cart == null)
+                {
+                    <p>Loading...</p>
+                }
+                else
+                {
+
+                    @foreach (var item in cart.Items)
+                    {
+
+                        <div class="card-body">
+                            <div class="float-left mr-3">
+                                <img src="@item.Product.image_src" class="shoppingcart-item" alt="">
+                            </div>
+                            <div class="float-left">
+                                <h3 class="card-price">EUR @item.Total</h3>
+                                <h4 class="text-primary">@item.Product.Title.</h4>
+
+                                <div class="Quantity">
+                                    <p class="text-dark d-block"> @item.Quantity</p>
+                                    <span class="d-block">
+                                        <input type="number" value="@item.Quantity" min="1" step="1" class="form-control input-number">
+                                    </span>
+                                </div>
+
+                            </div>
+                            <div class="float-right">
+                                <button type="button" class="close" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <hr>
+                        </div>
+                    }
+                }
+            </div>
+            </div>
+
+            <div class="col-sm-4 bg-light p-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="card-title text-secondary">Total</h1>
+                    </div>
+
+                    <div class="card-body">
+                        <hr>
+                    </div>
+                    <div class="card-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <h4 class="text-secondary">Delivery</h4>
+                                    <h4 class="text-secondary">Sub total</h4>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p class="text-secondary">€110</p>
+                                    <p class="text-secondary">?</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
 
 
 
-@code {
-    Product[] products;
-    Cart cart;
 
-    protected override async Task OnInitializedAsync()
-    {
-        var varcart = await LocalStorage.GetItem<Cart>("MyShoppingCart");
-        Console.WriteLine(varcart);
-        cart = varcart;
-    }
-}
+
+
+        @code {
+            Product[] products;
+            Cart cart;
+
+            protected override async Task OnInitializedAsync()
+            {
+                var varcart = await LocalStorage.GetItem<Cart>("MyShoppingCart");
+                Console.WriteLine(varcart);
+                cart = varcart;
+            }
+        }

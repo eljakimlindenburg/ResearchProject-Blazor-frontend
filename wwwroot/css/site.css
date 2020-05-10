@@ -8,3 +8,8 @@ img.card-img-top{
     max-width:250px;
 
 }
+
+.shoppingcart-item{
+    max-width:150px;
+    height:auto;
+}

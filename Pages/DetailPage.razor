@@ -26,25 +26,6 @@ else
 
 }
 
-<div class="container">
-    <div class="row">
-        <div class="col-sm-8">
-            @if (localProducts == null)
-            {
-                <p>Nothing in localstorage</p>
-            }
-            else
-            {
-                @foreach (var prod in localProducts)
-                {
-                    <p>@prod.Author</p>
-                }
-            }
-
-        </div>
-    </div> 
-</div>
-
 
 
 @code {
