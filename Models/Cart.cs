@@ -16,9 +16,18 @@ namespace Blazor.Models
                 decimal total = (decimal)0.0;
                 foreach(var item in Items)
                 {
-                    total += item.Product.Price;
+                    total += item.Total;
                 }
                 return total;
+            }
+            set
+            {
+                decimal total = (decimal)0.0;
+                foreach(var item in Items)
+                {
+                    total += item.Product.Price;
+                }
+
             }
         }
 

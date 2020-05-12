@@ -14,14 +14,14 @@
                 <div class="card-body">
                     <hr>
                 </div>
-                @if (cart == null)
+                @if (cartStateProvider.ShoppingCart.Items == null)
                 {
                     <p>Loading...</p>
                 }
                 else
                 {
 
-                    @foreach (var item in cart.Items)
+                    @foreach (var item in cartStateProvider.ShoppingCart.Items)
                     {
 
                         <div class="card-body">
@@ -35,14 +35,14 @@
                                 <div class="Quantity">
                                     <p class="text-dark d-block"> @item.Quantity</p>
                                     <span class="d-block">
-                                        <input type="number" value="@item.Quantity" min="1" step="1" class="form-control input-number">
+                                        <input type="number" min="1" step="1" class="form-control input-number" value="@item.Quantity" @onchange="@( async(eventArgs) => { item.Quantity = Convert.ToInt32(eventArgs.Value.ToString()); await ChangeQuantityLocalStorage();  } )" /> 
                                     </span>
                                 </div>
 
                             </div>
                             <div class="float-right">
-                                <button type="button" class="close" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
+                                <button type="button" class="close" aria-label="Close" @onclick="@(() => RemoveItem(@item))">
+                                    <span aria-hidden="true">&times;</span> 
                                 </button>
                             </div>
                         </div>
@@ -72,7 +72,7 @@
                                     <h4 class="text-secondary">Sub total</h4>
                                 </div>
                                 <div class="col-sm-6">
-                                    <p class="text-secondary">€110</p>
+                                    <p class="text-secondary">€@(cartStateProvider.ShoppingCart.Total)</p>
                                     <p class="text-secondary">?</p>
                                 </div>
                             </div>
@@ -83,19 +83,65 @@
         </div>
 </div>
 
+@code {
+    Product[] products;
+    Cart cart;
+
+    [CascadingParameter]
+    CartStateProvider cartStateProvider { get; set; }
+
+    [Parameter] public int CartProductQuantity { get; set; }
+
+    [Parameter]
+    public EventCallback<ChangeEventArgs> QuantityChanged { get; set; }
 
 
 
 
+    protected override async Task OnInitializedAsync()
+    {
+        var varcart = await LocalStorage.GetItem<Cart>("MyShoppingCart");
+        Console.WriteLine(varcart);
+        cart = varcart;
+    }
 
-        @code {
-            Product[] products;
-            Cart cart;
+    async Task RemoveItem(CartProduct product)
+    {
+        cartStateProvider.ShoppingCart.Items.Remove(product);
 
-            protected override async Task OnInitializedAsync()
-            {
-                var varcart = await LocalStorage.GetItem<Cart>("MyShoppingCart");
-                Console.WriteLine(varcart);
-                cart = varcart;
-            }
+        // Update the cart - save to localstorage
+        await cartStateProvider.SaveChangesAsync();
+
+    }
+
+    private async Task ChangeQuantityLocalStorage()
+    {
+
+        //Update total 
+
+        var total = cartStateProvider.ShoppingCart.Total;
+
+
+        Console.WriteLine(total.ToString());
+        foreach(var item in cartStateProvider.ShoppingCart.Items)
+        {
+            Console.WriteLine(item.Total);
         }
+        
+
+        await cartStateProvider.SaveChangesAsync();
+    }
+
+    async Task ChangeQuantity(CartProduct product ,int quantity)
+    {
+        var selectedItem = cartStateProvider.ShoppingCart.Items.Find(x => x.Product == product.Product);
+
+        // update quantity
+        if(selectedItem !=null ) selectedItem.Quantity = quantity;
+
+        await cartStateProvider.SaveChangesAsync();
+
+    }
+
+
+}

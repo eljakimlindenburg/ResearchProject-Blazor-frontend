@@ -7,24 +7,28 @@
 @inject Blazor.Extensions.Storage.Interfaces.ILocalStorage LocalStorage
 <div class="container">
     <div class="row">
+       
         @if (products == null)
         {
             <p><em>Loading...</em></p>
         }
         else
         {
-            @foreach (var prod in products)
+            @foreach (var prod in prods)
             {
                 <div class="col-sm-4">
                     <ItemCard prod="@prod" />
                 </div>
             }
         }
+
+        <CartModal></CartModal>
     </div>
 </div>
 
 @code{
     Product[] products;
+    List<Product> prods;
 
     protected override async Task OnInitializedAsync()
     {
@@ -32,8 +36,12 @@
 
         products = await Http.GetJsonAsync<Product[]>("http://localhost:3333/items/");
 
+
+        prods = products.ToList();
+
         var key = "products";
         await LocalStorage.SetItem<Product[]>(key, products);
     }
+
 }
 

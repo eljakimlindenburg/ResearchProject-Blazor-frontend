@@ -51,4 +51,9 @@ else
         ShoppingCart.LastAccessed = DateTime.Now;
         await LocalStorage.SetItem<Cart>("MyShoppingCart", ShoppingCart);
     }
+
+    public async Task ClearLocalStorage()
+    {
+        await LocalStorage.Clear();
+    }
 }
