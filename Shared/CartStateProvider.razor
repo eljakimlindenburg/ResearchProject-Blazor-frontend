@@ -45,11 +45,15 @@ else
         hasLoaded = true;
     }
 
-    public async Task SaveChangesAsync()
+    public async Task<bool> SaveChangesAsync()
     {
         // Set the time stamp to current time and save to local storage (in the browser).
         ShoppingCart.LastAccessed = DateTime.Now;
         await LocalStorage.SetItem<Cart>("MyShoppingCart", ShoppingCart);
+
+        return true;
+        
+
     }
 
     public async Task ClearLocalStorage()

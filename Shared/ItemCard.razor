@@ -25,14 +25,43 @@
             <button class="btn btn-secondary">
                 <i class="far fa-heart fa-sm"></i>
             </button>
-            
-           <button class="btn btn-primary" @onclick="AddToBasket">
-               <i class="fas fa-shopping-basket fa-sm" ></i>
-           </button> 
+
+            <button class="btn btn-primary" @onclick="AddToBasket">
+                <i class="fas fa-shopping-basket fa-sm"></i>
+            </button>
         </div>
 
     </div>
 </div>
+
+@if (ShowPopUp)
+{
+    <div class="modal @ModalClass" tabindex="-1" role="dialog" style="display:@ModalDisplay">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Modal body text goes here.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+@if (ShowBackDrop)
+{
+    <div class="modal-backdrop fade show"></div>
+}
 
 @code {
     [CascadingParameter] CartStateProvider CartStateProvider { get; set; }
@@ -52,8 +81,14 @@
     [Parameter]
     public Product prod { get; set; }
 
+    public bool ShowPopUp = false;
+    public string ModalClass = "";
+    public string ModalDisplay = "none";
+    public bool ShowBackDrop = false;
+
     async Task AddToBasket(MouseEventArgs e)
     {
+
 
 
         var item = new CartProduct
@@ -67,7 +102,7 @@
 
         Console.WriteLine("Is the item already in the cart?" + itemInCart.ToString());
 
-        if(itemInCart >= 0)
+        if (itemInCart >= 0)
         {
             CartStateProvider.ShoppingCart.Items[itemInCart].Quantity++;
         }
@@ -78,9 +113,36 @@
 
         Console.WriteLine(CartStateProvider.ToString());
 
-        await CartStateProvider.SaveChangesAsync();
+        ShowPopUp = await CartStateProvider.SaveChangesAsync();
+
+        
+
+        Console.WriteLine(ShowPopUp);
+
+        OpenPopUp();
+
+        await Task.Delay(2000);
+
+        ShowPopUp = false;
+
+        ClosePopUp();
 
 
+    }
 
+    public void OpenPopUp()
+    {
+        ModalClass = "show";
+        ModalDisplay = "block";
+        ShowBackDrop = true;
+        StateHasChanged();
+    }
+
+    public void ClosePopUp()
+    {
+        ModalClass = "";
+        ModalDisplay = "none";
+        ShowBackDrop = false;
+        StateHasChanged();
     }
 }
