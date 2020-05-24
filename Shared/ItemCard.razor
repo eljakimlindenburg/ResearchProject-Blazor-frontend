@@ -3,8 +3,9 @@
 @inject Blazor.Extensions.Storage.Interfaces.ILocalStorage LocalStorage
 
 <div class="card">
-    <img src="@prod.image_src" alt="" class="card-img-top">
+    <!-- img src="" alt="" class="card-img-top"> -->
     <div class="card-body">
+        <img src="@prod.image_src" alt="" class="card-img-top" />
         <h3 class="card-title text-primary"><a href="/detailpage/@prod.id">@prod.Title</a></h3>
         <h4 class="card-price">@prod.Price</h4>
         <p class="card-text">@prod.Desc</p>
@@ -40,17 +41,16 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
+                    <h5 class="modal-title">@prod.Title toegevoegd aan het winkelmandje</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Modal body text goes here.</p>
+                    <p>Dit product is toegevoegd aan je winkelmand</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluit dit venster</button>
                 </div>
             </div>
         </div>
@@ -89,8 +89,6 @@
     async Task AddToBasket(MouseEventArgs e)
     {
 
-
-
         var item = new CartProduct
         {
             Product = prod,
@@ -121,7 +119,7 @@
 
         OpenPopUp();
 
-        await Task.Delay(2000);
+        await Task.Delay(1500);
 
         ShowPopUp = false;
 

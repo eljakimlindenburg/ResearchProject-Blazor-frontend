@@ -36,7 +36,7 @@ else
         {
             // otherwise, check to see if the Cart has expired (default is 30 seconds)
             if (DateTime.Now > ShoppingCart.LastAccessed.AddSeconds(ShoppingCart.TimeToLive))
-            {
+            {   
                 // Expired. Create a new cart.
                 ShoppingCart = new Cart();
             }

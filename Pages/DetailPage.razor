@@ -24,7 +24,7 @@ else
        
     </div>
 
-}
+}   
 
 
 
@@ -34,18 +34,18 @@ else
     {
         get; set;
     }
-    Product product;
 
-    Product[] localProducts;
+    private Product product;
+
 
     protected override async Task OnInitializedAsync()
     {
         // products = await Http.GetJsonAsync<Product[]>("/sample-data/items.json");
 
         product = await Http.GetJsonAsync<Product>("http://localhost:3333/items/" + productId);
-        var key = "products";
 
-        localProducts = await LocalStorage.GetItem<Product[]>(key);
+
+
     }
 
 

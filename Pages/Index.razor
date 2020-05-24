@@ -14,7 +14,7 @@
         }
         else
         {
-            @foreach (var prod in prods)
+            @foreach (var prod in products)
             {
                 <div class="col-sm-4">
                     <ItemCard prod="@prod" />
@@ -32,15 +32,15 @@
 
     protected override async Task OnInitializedAsync()
     {
-        // products = await Http.GetJsonAsync<Product[]>("/sample-data/items.json");
 
-        products = await Http.GetJsonAsync<Product[]>("http://localhost:3333/items/");
-
+        if(products == null)
+        {
+            products = await Http.GetJsonAsync<Product[]>("http://localhost:3333/books/");
+        }
 
         prods = products.ToList();
 
-        var key = "products";
-        await LocalStorage.SetItem<Product[]>(key, products);
+     
     }
 
 }

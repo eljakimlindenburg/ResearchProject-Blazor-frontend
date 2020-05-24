@@ -20,15 +20,6 @@ namespace Blazor.Models
                 }
                 return total;
             }
-            set
-            {
-                decimal total = (decimal)0.0;
-                foreach(var item in Items)
-                {
-                    total += item.Product.Price;
-                }
-
-            }
         }
 
         public DateTime LastAccessed { get; set; }
