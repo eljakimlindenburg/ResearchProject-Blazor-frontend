@@ -26,8 +26,6 @@ else
 
 }   
 
-
-
 @code {
     [Parameter]
     public string productId
@@ -42,7 +40,7 @@ else
     {
         // products = await Http.GetJsonAsync<Product[]>("/sample-data/items.json");
 
-        product = await Http.GetJsonAsync<Product>("http://localhost:3333/items/" + productId);
+        product = await Http.GetJsonAsync<Product>("http://localhost:3333/books/" + productId);
 
 
 
