@@ -277,3 +277,4 @@ C:\Users\Lterwingen\Desktop\switch1920\researchProject\apps\Blazor\ResearchProje
 C:\Users\Lterwingen\Desktop\switch1920\researchProject\apps\Blazor\ResearchProject-Blazor-frontend\obj\Debug\netstandard2.0\blazor\_content\Blazor.Extensions.Storage.JS
 C:\Users\Lterwingen\Desktop\switch1920\researchProject\apps\Blazor\ResearchProject-Blazor-frontend\obj\Debug\netstandard2.0\RazorDeclaration\Shared\CartStateProvider.razor.g.cs
 C:\Users\Lterwingen\Desktop\switch1920\researchProject\apps\Blazor\ResearchProject-Blazor-frontend\obj\Debug\netstandard2.0\Razor\Shared\CartStateProvider.razor.g.cs
+C:\Users\Lterwingen\Desktop\switch1920\researchProject\apps\Blazor\ResearchProject-Blazor-frontend\obj\Debug\netstandard2.0\Blazor.csprojAssemblyReference.cache

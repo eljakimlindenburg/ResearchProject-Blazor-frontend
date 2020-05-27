@@ -35,33 +35,7 @@
     </div>
 </div>
 
-@if (ShowPopUp)
-{
-    <div class="modal @ModalClass" tabindex="-1" role="dialog" style="display:@ModalDisplay">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">@prod.Title toegevoegd aan het winkelmandje</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Dit product is toegevoegd aan je winkelmand</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluit dit venster</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
-}
-
-@if (ShowBackDrop)
-{
-    <div class="modal-backdrop fade show"></div>
-}
 
 @code {
     [CascadingParameter] CartStateProvider CartStateProvider { get; set; }
@@ -81,10 +55,7 @@
     [Parameter]
     public Product prod { get; set; }
 
-    public bool ShowPopUp = false;
-    public string ModalClass = "";
-    public string ModalDisplay = "none";
-    public bool ShowBackDrop = false;
+ 
 
     async Task AddToBasket(MouseEventArgs e)
     {
@@ -111,36 +82,12 @@
 
         Console.WriteLine(CartStateProvider.ToString());
 
-        ShowPopUp = await CartStateProvider.SaveChangesAsync();
+         await CartStateProvider.SaveChangesAsync();
 
         
 
-        Console.WriteLine(ShowPopUp);
-
-        OpenPopUp();
-
-        await Task.Delay(1500);
-
-        ShowPopUp = false;
-
-        ClosePopUp();
-
+      
 
     }
 
-    public void OpenPopUp()
-    {
-        ModalClass = "show";
-        ModalDisplay = "block";
-        ShowBackDrop = true;
-        StateHasChanged();
-    }
-
-    public void ClosePopUp()
-    {
-        ModalClass = "";
-        ModalDisplay = "none";
-        ShowBackDrop = false;
-        StateHasChanged();
-    }
 }
