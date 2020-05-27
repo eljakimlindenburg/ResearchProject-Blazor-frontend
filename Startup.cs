@@ -17,5 +17,5 @@ namespace Blazor
         {
             app.AddComponent<App>("app");
         }
-    }
+    }   
 }
